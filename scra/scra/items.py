@@ -12,8 +12,8 @@ class ScraItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     title = scrapy.Field()
-    # up = scrapy.Field()
-    # time = scrapy.Field()
-    # click = scrapy.Field()
-    # comments = scrapy.Field()
+    up = scrapy.Field()
+    time = scrapy.Field()
+    click = scrapy.Field()
+    comments = scrapy.Field()
     pass
