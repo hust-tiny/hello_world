@@ -44,6 +44,48 @@ class ScraPipeline(object):
         # 通过cursor执行增删查改
         self.cursor = self.connect.cursor();
 
+# csv写入
+class CsvPipeline(object):
+    pass
+
+# excle写入
+class ExclePipeline(object):
+    pass
+
+#Mysql数据库连接设置
+class MysqlPipeline(object):
+
+    def __init__(self):
+        # 连接数据库
+        self.connect = pymysql.connect(
+            host='localhost',  # 数据库地址
+            port=3306,  # 数据库端口
+            db='scrapy',  # 数据库名
+            user='root',  # 数据库用户名
+            passwd='781950712',  # 数据库密码
+            charset='utf8',  # 编码方式
+            use_unicode=True)
+
+        # 通过cursor执行增删查改
+        self.cursor = self.connect.cursor();
+
+    def process_item(self, item, spider):
+        titles = item['title']
+        #     # numbers = item['number']
+        for i in titles:
+            title_str = str(i+'\r\n')
+            title_list = title_str.split("UP:",-1)
+            title_list2 = title_list[1].split("发布于")
+            title_list3 = title_list2[1].split("/")
+            self.cursor.execute(
+                 """insert into acfun(title,up,day_time,click,comment)
+                value(%s,%s,%s,%s,%s)""",
+                    (title_list[0],title_list2[0],title_list3[0],title_list3[1],title_list3[2],)
+                            )
+            self.connect.commit()
+        return item
+    pass
+
 
 class MongoPipeline(object):
     collection = 'dayli'

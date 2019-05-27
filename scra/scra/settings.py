@@ -16,8 +16,11 @@ DEFAULT_REQUEST_HEADERS = {
 }
 
 ITEM_PIPELINES = {
-    'scra.pipelines.ScraPipeline':300,
-    'scra.pipelines.MongoPipeline':400,
+    'scra.pipelines.ScraPipeline':100,
+    'scra.pipelines.CsvPipeline':200,
+    'scra.pipelines.ExclePipeline':300,
+    'scra.pipelines.MysqlPipeline':400,
+    'scra.pipelines.MongoPipeline':500,
 }
 
 MONGO_URI = 'mongodb://localhost:27017'
