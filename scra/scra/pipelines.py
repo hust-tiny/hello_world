@@ -40,7 +40,7 @@ class CsvPipeline(object):
                 title_list2 = title_list[1].split("发布于")
                 title_list3 = title_list2[1].split("/")
                 spamwriter.writerow((title_list[0], title_list2[0], title_list3[0], title_list3[1], title_list3[2]))
-    pass
+        return item
 
 # excle写入
 class ExclePipeline(object):
@@ -54,11 +54,12 @@ class ExclePipeline(object):
             title_list = title_str.split("UP:", -1)
             title_list2 = title_list[1].split("发布于")
             title_list3 = title_list2[1].split("/")
-            excle_list = [title_list[0],title_list2[0],title_list3[0],title_list3[1],title_list[2]]
+            excle_list = [title_list[0],title_list2[0],title_list3[0],title_list3[1],title_list3[2]]
             for column in range(5):
                 sheet.write(row,column,excle_list[column])
             row+=1
         f.save("scrapy.xlsx")
+        return item
 
 
 #Mysql数据库连接设置
